@@ -18,6 +18,7 @@
   "author": "Joshua Wu",
   "license": "MIT",
   "dependencies": {
-    "prompts": "^1.1.1"
+    "prompts": "^1.1.1",
+    "shelljs": "^0.8.2"
   }
 }
