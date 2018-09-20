@@ -1,0 +1,23 @@
+{
+  "name": "liferay-deploy-all-osb",
+  "bin": {
+    "dao": "./index.js"
+  },
+  "version": "0.0.1",
+  "description": "Easily select which osb modules to deploy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"This is a test\""
+  },
+  "keywords": [
+    "liferay",
+    "osb",
+    "gradle",
+    "deploy"
+  ],
+  "author": "Joshua Wu",
+  "license": "MIT",
+  "dependencies": {
+    "prompts": "^1.1.1"
+  }
+}
