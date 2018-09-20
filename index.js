@@ -6,7 +6,10 @@ if (!shell.which('git')) {
 	shell.exit(1);
 }
 
-const cwd = shell.exec('pwd')
+const srcDir = shell.exec('pwd')
+
+// @todo add get root project method
+// @todo add check to make sure this is an osb- project
 
 /**
  * Return array of directories containing build.gradle file
@@ -45,6 +48,16 @@ const buildPayload = (directories) => {
 
 	return retVal;
 }
+
+/**
+ * Return path to local gradlew file or liferay gradlew
+ * @todo Figure out how the user should be prompted on using their
+ * gradlew file
+ */
+const findGradlew = () => {
+}
+
+
 
 const main = async () => {
 	const directories = getDirectories();
