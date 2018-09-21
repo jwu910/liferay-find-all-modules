@@ -36,9 +36,7 @@ if (!shell.which('git')) {
   shell.exit(1);
 }
 
-const srcDir = shell.exec('pwd');
-
-// @todo add check to make sure this is an osb- project
+const srcDir = shell.exec('pwd', { silent: true });
 
 /**
  * Return array of directories containing build.gradle file
@@ -83,7 +81,7 @@ const executeAll = async response => {
         shell.cd(srcDir);
       }
     } catch (error) {
-      process.stderr.write(chalk.red('Encountered an error: ', error))
+      process.stderr.write(chalk.red('Encountered an error: ', error));
       process.exit(1);
     }
   });
@@ -132,4 +130,4 @@ const main = async () => {
 
 module.exports = {
   main
-}
+};
