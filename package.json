@@ -1,7 +1,7 @@
 {
-  "name": "liferay-deploy-all-osb",
+  "name": "liferay-find-all-modules",
   "bin": {
-    "dao": "./index.js"
+    "fam": "./index.js"
   },
   "version": "0.0.1",
   "description": "Easily select which osb modules to deploy",
@@ -18,6 +18,8 @@
   "author": "Joshua Wu",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^2.4.1",
+    "minimist": "^1.2.0",
     "prompts": "^1.1.1",
     "shelljs": "^0.8.2"
   }
