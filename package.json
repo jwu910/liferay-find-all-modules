@@ -4,9 +4,10 @@
     "fam": "./index.js"
   },
   "version": "0.0.1",
-  "description": "Easily select which osb modules to deploy",
+  "description": "Quickly find all available osb modules in your osb project & execute commands against them",
   "main": "index.js",
   "scripts": {
+    "build": "babel src -d dist",
     "test": "echo \"This is a test\""
   },
   "keywords": [
@@ -22,5 +23,8 @@
     "minimist": "^1.2.0",
     "prompts": "^1.1.1",
     "shelljs": "^0.8.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
   }
 }
