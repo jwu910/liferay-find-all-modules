@@ -3,7 +3,7 @@
   "bin": {
     "fam": "./index.js"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Quickly find all available osb modules in your osb project & execute commands against them",
   "main": "index.js",
   "scripts": {
