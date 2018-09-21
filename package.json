@@ -28,6 +28,7 @@
   "author": "Joshua Wu",
   "license": "MIT",
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "chalk": "^2.4.1",
     "minimist": "^1.2.0",
     "prompts": "^1.1.1",
@@ -36,7 +37,6 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
-    "babel-env": "^2.4.1",
-    "babel-polyfill": "^6.26.0"
+    "babel-env": "^2.4.1"
   }
 }
