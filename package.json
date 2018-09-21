@@ -9,7 +9,7 @@
     "README.md"
   ],
   "engines": {
-    "node": ">=4"
+    "node": ">=7"
   },
   "version": "0.2.0",
   "description": "Quickly find all available osb modules in your osb project & execute commands against them",
@@ -36,6 +36,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
-    "babel-env": "^2.4.1"
+    "babel-env": "^2.4.1",
+    "babel-polyfill": "^6.26.0"
   }
 }
