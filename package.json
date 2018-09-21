@@ -3,6 +3,14 @@
   "bin": {
     "fam": "./index.js"
   },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=4"
+  },
   "version": "0.1.2",
   "description": "Quickly find all available osb modules in your osb project & execute commands against them",
   "main": "index.js",
