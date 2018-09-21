@@ -13,8 +13,10 @@ if (argv.h || argv.help) {
     Liferay OSB Module Finder
 
     -h, --help        : Display this help text
-    -v, --version     : Display current version
+    --version         : Display current version
     -p                : Print all selected modules
+    -f <string>       : Filter searched paths
+    -v                : Verbose
 
     Usage    : fam [customGradleCommand] [task] [task]
     example  : fam runGradle clean deploy
@@ -24,7 +26,7 @@ if (argv.h || argv.help) {
   process.exit(0);
 }
 
-if (argv.v || argv.version) {
+if (argv.version) {
   shell.echo(`
     ${pkg.version}
   `);
@@ -35,19 +37,26 @@ if (!shell.which('git')) {
   shell.echo('Sorry, this script requires git');
   shell.exit(1);
 }
+const SILENT_OPTS = {silent: true}
 
-const srcDir = shell.exec('pwd', { silent: true });
+const SRC_DIR = shell.exec('pwd', SILENT_OPTS);
 
 /**
  * Return array of directories containing build.gradle file
  */
 const getDirectories = () => {
-  const shellResults = shell.exec(
-    'git ls-files | grep build.gradle | xargs -I {} dirname {}',
-    { silent: true }
-  );
 
-  return shellResults.split('\n');
+  let results = shell.exec('git ls-files', SILENT_OPTS);
+
+  results = results.grep('build.gradle');
+
+  if (argv.f && typeof argv.f === 'string') {
+    results = results.grep(argv.f);
+  }
+
+  results = results.exec('xargs -I {} dirname {}', SILENT_OPTS);
+
+  return results.split('\n');
 };
 
 /**
@@ -70,19 +79,24 @@ const buildPayload = (directories = []) => {
 /**
  * Execute the parsed argv as commands to run against each module path selected
  */
-const executeAll = async response => {
+const executeAll = response => {
+  shell.echo(chalk.yellow(`Executing ${chalk.bold(argv._.join(' '))}`));
+
   response.map(modulePath => {
-    try {
-      if (modulePath !== '.') {
-        shell.cd(modulePath);
-        shell.echo(chalk.green(`Changed to ${modulePath}`));
-        shell.echo(chalk.green(`Executing ${chalk.bold(argv._.join(' '))}`));
-        shell.exec(`${argv._.join(' ')}`);
-        shell.cd(srcDir);
+    if (modulePath !== '.') {
+      shell.cd(modulePath);
+      shell.echo(chalk.yellow(`Current target: ${chalk.bold(modulePath)}`));
+
+      const {stderr} = shell.exec(`${argv._.join(' ')}`, {silent: !argv.v});
+
+      if (stderr) {
+        process.stderr.write(chalk.red('Encountered an error: ', stderr));
+        // process.exit(1);
+      } else {
+        process.stdout.write(chalk.green(`Done\n`));
       }
-    } catch (error) {
-      process.stderr.write(chalk.red('Encountered an error: ', error));
-      process.exit(1);
+
+      shell.cd(SRC_DIR);
     }
   });
 };
@@ -121,9 +135,9 @@ const main = async () => {
     response.selection = [];
   }
 
-  if ((Object.keys(argv).length === 1 && argv._.length === 0) || argv.p) {
+  if (argv._.length === 0 || argv.p) {
     printAll(response.selection);
-  } else if (Object.keys(argv).length === 1 && argv._.length > 0) {
+  } else {
     executeAll(response.selection);
   }
 };
