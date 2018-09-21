@@ -112,7 +112,7 @@ const main = async () => {
   let response = await prompts({
     type: 'multiselect',
     name: 'selection',
-    message: 'Select module(s) to deploy',
+    message: `Will attempt to execute ${chalk.bold(argv._.length > 0 ? argv._.join(' '): 'print')} on selection`,
     choices: payload,
     hint: '- Space to select. Return to submit'
   });

@@ -10,7 +10,7 @@ const currentDir = dirs[dirs.length - 1];
 
 if (!currentDir.startsWith('osb-')) {
   process.stderr.write('Please call this from an OSB project');
-  process.stderr.write(`Current dirname : ${currentDir}`);
+  process.stderr.write(`\nCurrent dirname : ${currentDir}\n`);
   process.exit(1);
 }
 
